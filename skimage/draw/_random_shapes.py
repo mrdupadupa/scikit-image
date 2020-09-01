@@ -172,8 +172,8 @@ def _generate_triangle_mask(point, image, shape, random):
     return triangle, label
 
 
-def _generate_ellipse_mask(point, image, shape, random):
-    """Generate a mask for a filled ellipse shape.
+"""def _generate_ellipse_mask(point, image, shape, random):
+    Generate a mask for a filled ellipse shape.
 
     The rotation, major and minor semi-axes of the ellipse are generated
     randomly.
@@ -204,7 +204,7 @@ def _generate_ellipse_mask(point, image, shape, random):
         bounding box coordinates of the shape.
     indices : 2-D array
         A mask of indices that the shape fills.
-    """
+    
     if shape[0] == 1 or shape[1] == 1:
         raise ValueError('size must be > 1 for ellipses')
     min_radius = shape[0] / 2.0
@@ -238,17 +238,30 @@ def _generate_ellipse_mask(point, image, shape, random):
     max_y = np.max(ellipse[1]) + 1
     label = ('ellipse', ((min_x, max_x), (min_y, max_y)))
 
-    return ellipse, label
+    return ellipse, label"""
 
 
 
 # Allows lookup by key as well as random selection.
-SHAPE_GENERATORS = dict(
+SHAPE_GENERATORS_ALL = dict(
     rectangle=_generate_rectangle_mask,
     circle=_generate_circle_mask,
     triangle=_generate_triangle_mask,
-    ellipse=_generate_ellipse_mask)
-SHAPE_CHOICES = list(SHAPE_GENERATORS.values())
+    #ellipse=_generate_ellipse_mask)
+SHAPE_GENERATORS_T_R = dict(
+    rectangle=_generate_rectangle_mask,
+    #circle=_generate_circle_mask,
+    triangle=_generate_triangle_mask,
+    #ellipse=_generate_ellipse_mask)
+SHAPE_GENERATORS_C = dict(
+    #rectangle=_generate_rectangle_mask,
+    circle=_generate_circle_mask,
+    #triangle=_generate_triangle_mask,
+    #ellipse=_generate_ellipse_mask)
+SHAPE_CHOICES_ALL = list(SHAPE_GENERATORS_ALL.values())
+SHAPE_CHOICES_T_R = list(SHAPE_GENERATORS_T_R.values())
+SHAPE_CHOICES_C = list(SHAPE_GENERATORS_C.values())
+MY_SHAPE_CHOICES = list(.values())
 
 
 def _generate_random_colors(num_colors, num_channels, intensity_range, random):
@@ -297,6 +310,7 @@ def random_shapes(image_shape,
                   multichannel=True,
                   num_channels=3,
                   shape=None,
+                  my_shape_list=[1,2,3]
                   intensity_range=None,
                   allow_overlap=False,
                   num_trials=100,
@@ -394,17 +408,22 @@ def random_shapes(image_shape,
 
     random = np.random.RandomState(random_seed)
     user_shape = shape
+    shape_list = 
     image_shape = (image_shape[0], image_shape[1], num_channels)
     image = np.full(image_shape, 255, dtype=np.uint8)
     filled = np.zeros(image_shape, dtype=bool)
     labels = []
 
     num_shapes = random.randint(min_shapes, max_shapes + 1)
+    
     colors = _generate_random_colors(num_shapes, num_channels,
                                      intensity_range, random)
     for shape_idx in range(num_shapes):
         if user_shape is None:
+            
             shape_generator = random.choice(SHAPE_CHOICES)
+            shape_generator = MY_SHAPE_CHOICES               #important one
+            
         else:
             shape_generator = SHAPE_GENERATORS[user_shape]
         shape = (min_size, max_size)
