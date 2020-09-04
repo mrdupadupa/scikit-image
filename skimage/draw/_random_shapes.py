@@ -246,18 +246,22 @@ def _generate_triangle_mask(point, image, shape, random):
 SHAPE_GENERATORS_ALL = dict(
     rectangle=_generate_rectangle_mask,
     triangle=_generate_triangle_mask,
-    circle=_generate_circle_mask,
-    #ellipse=_generate_ellipse_mask)
+    circle=_generate_circle_mask
+    #ellipse=_generate_ellipse_mask
+    )
 SHAPE_GENERATORS_R_T = dict(
     rectangle=_generate_rectangle_mask,
     #circle=_generate_circle_mask,
-    triangle=_generate_triangle_mask,
-    #ellipse=_generate_ellipse_mask)
+    triangle=_generate_triangle_mask
+    #ellipse=_generate_ellipse_mask
+    )
 SHAPE_GENERATORS_C = dict(
     #rectangle=_generate_rectangle_mask,
-    circle=_generate_circle_mask,
+    circle=_generate_circle_mask
     #triangle=_generate_triangle_mask,
-    #ellipse=_generate_ellipse_mask)
+    #ellipse=_generate_ellipse_mask
+    )
+
 SHAPE_CHOICES_ALL = list(SHAPE_GENERATORS_ALL.values())
 SHAPE_CHOICES_R_T = list(SHAPE_GENERATORS_R_T.values())
 SHAPE_CHOICES_C = list(SHAPE_GENERATORS_C.values())
