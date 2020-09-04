@@ -265,34 +265,7 @@ SHAPE_CHOICES_C = list(SHAPE_GENERATORS_C.values())
 
 
 def _generate_random_colors(num_colors, num_channels, intensity_range, random):
-    """Generate an array of random colors.
-
-    Parameters
-    ----------
-    num_colors : int
-        Number of colors to generate.
-    num_channels : int
-        Number of elements representing color.
-    intensity_range : {tuple of tuples of ints, tuple of ints}, optional
-        The range of values to sample pixel values from. For grayscale images
-        the format is (min, max). For multichannel - ((min, max),) if the
-        ranges are equal across the channels, and
-        ((min_0, max_0), ... (min_N, max_N)) if they differ.
-    random : np.random.RandomState
-        The random state to use for random sampling.
-
-    Raises
-    ------
-    ValueError
-        When the `intensity_range` is not in the interval (0, 255).
-
-    Returns
-    -------
-    colors : array
-        An array of shape (num_colors, num_channels), where the values for
-        each channel are drawn from the corresponding `intensity_range` """
-
-   
+       
     if num_channels == 1:
         intensity_range = (intensity_range, )
     elif len(intensity_range) == 1:
@@ -316,80 +289,7 @@ def random_shapes(image_shape,
                   allow_overlap=False,
                   num_trials=100,
                   random_seed=None):
-    
-    """Generate an image with random shapes, labeled with bounding boxes.
-
-    The image is populated with random shapes with random sizes, random
-    locations, and random colors, with or without overlap.
-
-    Shapes have random (row, col) starting coordinates and random sizes bounded
-    by `min_size` and `max_size`. It can occur that a randomly generated shape
-    will not fit the image at all. In that case, the algorithm will try again
-    with new starting coordinates a certain number of times. However, it also
-    means that some shapes may be skipped altogether. In that case, this
-    function will generate fewer shapes than requested.
-
-    Parameters
-    ----------
-    image_shape : tuple
-        The number of rows and columns of the image to generate.
-    max_shapes : int
-        The maximum number of shapes to (attempt to) fit into the shape.
-    min_shapes : int, optional
-        The minimum number of shapes to (attempt to) fit into the shape.
-    min_size : int, optional
-        The minimum dimension of each shape to fit into the image.
-    max_size : int, optional
-        The maximum dimension of each shape to fit into the image.
-    multichannel : bool, optional
-        If True, the generated image has ``num_channels`` color channels,
-        otherwise generates grayscale image.
-    num_channels : int, optional
-        Number of channels in the generated image. If 1, generate monochrome
-        images, else color images with multiple channels. Ignored if
-        ``multichannel`` is set to False.
-    shape : {rectangle, circle, triangle, ellipse, None} str, optional
-        The name of the shape to generate or `None` to pick random ones.
-    intensity_range : {tuple of tuples of uint8, tuple of uint8}, optional
-        The range of values to sample pixel values from. For grayscale images
-        the format is (min, max). For multichannel - ((min, max),) if the
-        ranges are equal across the channels, and ((min_0, max_0), ... (min_N, max_N))
-        if they differ. As the function supports generation of uint8 arrays only,
-        the maximum range is (0, 255). If None, set to (0, 254) for each
-        channel reserving color of intensity = 255 for background.
-    allow_overlap : bool, optional
-        If `True`, allow shapes to overlap.
-    num_trials : int, optional
-        How often to attempt to fit a shape into the image before skipping it.
-    random_seed : int, optional
-        Seed to initialize the random number generator.
-        If `None`, a random seed from the operating system is used.
-
-    Returns
-    -------
-    image : uint8 array
-        An image with the fitted shapes.
-    labels : list
-        A list of labels, one per shape in the image. Each label is a
-        (category, ((r0, r1), (c0, c1))) tuple specifying the category and
-        bounding box coordinates of the shape.
-
-    Examples
-    --------
-    >>> import skimage.draw
-    >>> image, labels = skimage.draw.random_shapes((32, 32), max_shapes=3)
-    >>> image # doctest: +SKIP
-    array([
-       [[255, 255, 255],
-        [255, 255, 255],
-        [255, 255, 255],
-        ...,
-        [255, 255, 255],
-        [255, 255, 255],
-        [255, 255, 255]]], dtype=uint8)
-    >>> labels # doctest: +SKIP
-    [('circle', ((22, 18), (25, 21))),
-     ('triangle', ((5, 6), (13, 13)))]"""
+        
     
     if min_size > image_shape[0] or min_size > image_shape[1]:
         raise ValueError('Minimum dimension must be less than ncols and nrows')
