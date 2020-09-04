@@ -290,9 +290,9 @@ def _generate_random_colors(num_colors, num_channels, intensity_range, random):
     -------
     colors : array
         An array of shape (num_colors, num_channels), where the values for
-        each channel are drawn from the corresponding `intensity_range`.
+        each channel are drawn from the corresponding `intensity_range` """
 
-    """
+   
     if num_channels == 1:
         intensity_range = (intensity_range, )
     elif len(intensity_range) == 1:
@@ -389,8 +389,7 @@ def random_shapes(image_shape,
         [255, 255, 255]]], dtype=uint8)
     >>> labels # doctest: +SKIP
     [('circle', ((22, 18), (25, 21))),
-     ('triangle', ((5, 6), (13, 13)))]
-    """
+     ('triangle', ((5, 6), (13, 13)))]"""
     
     if min_size > image_shape[0] or min_size > image_shape[1]:
         raise ValueError('Minimum dimension must be less than ncols and nrows')
