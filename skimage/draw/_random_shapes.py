@@ -316,6 +316,7 @@ def random_shapes(image_shape,
                   allow_overlap=False,
                   num_trials=100,
                   random_seed=None):
+    
     """Generate an image with random shapes, labeled with bounding boxes.
 
     The image is populated with random shapes with random sizes, random
@@ -390,6 +391,7 @@ def random_shapes(image_shape,
     [('circle', ((22, 18), (25, 21))),
      ('triangle', ((5, 6), (13, 13)))]
     """
+    
     if min_size > image_shape[0] or min_size > image_shape[1]:
         raise ValueError('Minimum dimension must be less than ncols and nrows')
     max_size = max_size or max(image_shape[0], image_shape[1])
