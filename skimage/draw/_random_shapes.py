@@ -283,7 +283,7 @@ def random_shapes(image_shape,
                   multichannel=True,
                   num_channels=3,
                   shape=None,
-                  scenario=shape_generator_all_halo,
+                  scenario=SHAPE-GENERATOR_ALL_HALO,
                   #my_shape_list=[1,2,3]
                   intensity_range=None,
                   allow_overlap=False,
@@ -323,16 +323,16 @@ def random_shapes(image_shape,
     for shape_idx in range(num_shapes):
         if user_shape is None:
     
-            if scenario = shape_generator_all_halo:
+            if scenario == SHAPE-GENERATOR_ALL_HALO:
                 shape_generator = random.choice(SHAPE_CHOICES_ALL, p=[0.4, 0.4, 0.2])
     
-            elif scenario = shape_generator_all_core:
+            elif scenario == SHAPE-GENERATOR_ALL_CORE:
                 shape_generator = random.choice(SHAPE_CHOICES_ALL, p=[0.1, 0.1, 0.8])
     
-            elif scenario = shape_generator_r_t:
+            elif scenario == SHAPE-GENERATOR_R_T:
                 shape_generator = random.choice(SHAPE_CHOICES_R_T)
     
-            elif scenario = shape_generator_c:
+            elif scenario == SHAPE-GENERATOR_C:
                 shape_generator = random.choice(SHAPE_CHOICES_C)
     
             #shape_generator = MY_SHAPE_CHOICES               #important one
